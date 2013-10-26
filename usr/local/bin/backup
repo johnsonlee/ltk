@@ -1,0 +1,7 @@
+#!/bin/bash
+
+EXT="$(date '+%Y%m%d-%I:%M:%S')"
+
+for f in $@; do
+	cp -rvf "${f}" "${f}.${EXT}.bak"
+done
