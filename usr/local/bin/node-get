@@ -1,0 +1,7 @@
+#!/bin/bash
+
+URL=$(curl -s http://nodejs.org | grep -Po "http://([\w\.]+\/)+?v$1/+node-v$1.tar\.gz")
+
+[ ! -z "$URL" ] && {
+	wget $URL
+}
