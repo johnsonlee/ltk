@@ -1,6 +1,12 @@
-#!/bin/bash
+#!/bin/sh
 
-URL=$(curl -s http://nodejs.org | grep -Po "http://([\w\.]+\/)+?v$1/+node-v$1.tar\.gz")
+
+NODEORG="http://nodejs.org"
+BASEURL="${NODEORG}/dist"
+PATTERN="${BASEURL}/v\d+(\.\d+)+"
+VERSION="$(curl -s ${NODEORG} | grep -Po ${PATTERN} | head -n 1 | awk -F'/' '{print $NF}')"
+URL=${BASEURL}/${VERSION}/node-${VERSION}.tar.gz
+echo 
 
 [ ! -z "$URL" ] && {
 	wget $URL
